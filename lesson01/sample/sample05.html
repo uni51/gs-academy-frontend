@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>sample07</title>
+<script>
+    //--------------------------
+    //配列１
+    var list1 = ['aaa','bbb','ccc']; 
+    console.log("[list1]-------------");
+	console.log(list1[0]);
+	console.log(list1[1]);
+	console.log(list1[2]);
+	//--------------------------
+    //配列２
+    var list2 = new Array('aaa', 'bbb','ccc'); 
+	console.log("[list2]-------------");
+	console.log(list2[0]);
+	console.log(list2[1]);
+	console.log(list2[2]);
+	 //--------------------------
+    //配列３（オブジェクト）
+    var list3 = {'a':'あ', 'b':'い','c':'う'};  
+	console.log("[list3]-------------");
+	console.log(list3["a"]);
+	console.log(list3["b"]);
+	console.log(list3["c"]);
+	//--------------------------
+    //配列４（オブジェクト）
+    var list4 = {
+	    "obj": {"c1":"A", "c2":"B", "c3":"C"}
+	};
+	console.log("[list4]1-------------");
+	console.log(list4["obj"]["c1"]);
+	console.log(list4["obj"]["c2"]);
+	console.log(list4["obj"]["c3"]);
+	console.log("[list4]2-------------");
+	console.log(list4.obj.c1);
+	console.log(list4.obj.c2);
+	console.log(list4.obj.c3);
+	//--------------------------
+	//配列５（JSON）
+    var list5 =[
+		{ "firstName":"Yamazaki" , "lastName":"Tarou" },
+		{ "firstName":"Anna" , "lastName":"Smith" },
+		{ "firstName":"Peter" , "lastName": "Jones" }
+	];
+	console.log("[list5:firstName]-------------");
+	console.log(list5[0].firstName);
+	console.log(list5[1].firstName);
+	console.log(list5[2].firstName);
+	//--------------------------
+	//オブジェクト（Object）
+	var obj = new Object();
+	obj.firstname = "Yamazaki";
+	obj.surname = "Tarou";
+	obj.phone = ["000-0100", "000-0120"];
+	console.log("[obj]-------------");
+	console.log(obj.firstname);
+	console.log(obj.surname);
+	console.log(obj.phone[0]);
+	console.log(obj.phone[1]);
+	//--------------------------
+</script>
+</head>
+<body>
+	<h1>sample07: 配列/JSON/Objectの確認</h1>
+</body>
+</html>

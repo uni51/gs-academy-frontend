@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#canvas{
+			background:#ccc;
+		}
+	</style>
+</head>
+<body>
+
+<p><input type="color" name="color" id="color" valeu=""></p>
+<canvas id="canvas" width="400" height="300"></canvas>
+
+<script src="//code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+/*Canvasに関する記述をここから書いていきましょう*/
+
+var can = $("#canvas")[0];
+var ctx = can.getContext("2d");
+
+ctx.strokeStyle = "#00f"; // 線の色の指定
+ctx.lineWidth = 9;
+ctx.linecap = "rount";
+
+var oldX,oldY;
+var flag = false;
+
+/* 変更後 */
+$("#color").on("change",function(){
+    var color = $("#color").val();
+    ctx.strokeStyle = color;
+});
+
+$(can).on("mousedown",function(e){
+    oldX = e.offsetX;
+    oldY = e.offsetY;
+    flag = true;
+    console.log(e.offsetX); // X座標
+    console.log(e.offsetY); // Y座標
+});
+
+$(can).on("mouseup mouseleave",function(){
+    flag = false;
+});
+
+$(can).on("mousemove",function(e){
+    // マウスが押されている、つまりflag==trueの時に描画
+    if(flag==true){
+        // 描画のスクリプトを実行する
+        var x = e.offsetX;
+        var y = e.offsetY;
+
+        ctx.beginPath();
+        ctx.moveTo(oldX,oldY); //開始点X座標とY座標
+        ctx.lineTo(x,y);
+        ctx.stroke();
+        ctx.closePath();
+        
+        oldX = x;
+        oldY = y;
+    }
+
+});
+
+
+// 3-1 円を描く
+// 1 どんな見た目の図形を描くのか宣言
+//ctx.fileStyle = "#f90"; // 塗りつぶしの色を指定
+//ctx.strokeStyle = "#090"; // 線の色の指定
+//ctx.lineWidth = 9; // 線の太さの指定
+//
+// 2 どこにどんな形の図形を描くのか指定
+//ctx.arc(100,100,30,0,Math.PI*2,true); // 円を描く
+//
+// 3 描画をする
+// stroke()やfill();
+//ctx.fill();
+
+
+// 3-2 四角形を描く
+
+
+// 3-3 線を描く
+//ctx.beginPath();
+//ctx.moveTo(10,10); //開始点X座標とY座標
+//ctx.lineTo(100,100); //終了点X座標とY座標
+//ctx.stroke(); //線を描画
+//ctx.closePath(); //図形を閉じようとします
+
+
+
+</script>
+</body>
+</html>

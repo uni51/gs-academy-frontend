@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#canvas{
+			background:#ccc;
+		}
+	</style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="600"></canvas>
+	
+<script src="//code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+/*-------------------
+ * アニメーション
+ *------------------*/
+var can =  $("#canvas")[0];
+var ctx = can.getContext("2d");
+
+ctx.fillStyle = "#990";
+var ob = {x:50,y:50};
+	
+ctx.fillRect(ob.x,ob.y,10,10);
+
+var animation = function(){
+	ctx.clearRect(ob.x,ob.y,10,10);
+	ob.x +=1;
+	ob.y +=1;
+	ctx.fillRect(ob.x,ob.y,10,10);
+	console.log(ob.y);
+	if(ob.y>=can.height-10||ob.x>=can.width){
+		clearInterval(timer);
+
+	}
+}	
+var timer = setInterval(animation,10);
+
+	
+//下記はrequrestAnimationFrameを使用した場合
+//var requestAnimationFrame = window.requestAnimationFrame ||
+//						 window.mozRequestAnimationFrame ||
+//												 window.webkitRequestAnimationFrame ||
+//						 window.msRequestAnimationFrame;
+//window.requestAnimationFrame = requestAnimationFrame;
+//	
+//window.requestAnimationFrame(animation);
+//var startTime = new Date().getTime();
+//(function animation(){
+//    window.requestAnimationFrame(animation);
+//    var currentTime = new Date().getTime();　
+//    var status = (startTime - currentTime) 
+//    console.log(status);
+//		ctx.clearRect(ob.x,ob.y,10,10);
+//		ob.x +=1;
+//		ob.y +=1;
+//		ctx.fillRect(ob.x,ob.y,10,10);
+//})();
+</script>
+
+</body>
+</html>

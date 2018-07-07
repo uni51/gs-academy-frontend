@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#canvas{
+			background:#ccc;
+		}
+	</style>
+</head>
+<body>
+<p><input type="color" name="color" id="color"></p>
+<canvas id="canvas" width="800" height="600"></canvas>
+	
+<script src="//code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+/*-------------------
+ * 授業内演習の最低要項
+ *------------------*/
+var can =  $("#canvas")[0];
+var ctx = can.getContext("2d");
+	
+var flag = false;
+var oldX,oldY;
+
+ctx.lineWidth = "10";
+ctx.strokeStyle = "#990";
+ctx.lineCap = "round";
+	
+var down = function(e){
+	flag = true;
+	oldX = e.offsetX;
+	oldY = e.offsetY;
+}
+
+var up = function(e){
+	flag = false;
+	console.log(flag);
+}
+
+var draw =function(e){
+	if(flag==true){
+		var x = e.offsetX;
+		var y = e.offsetY;
+		ctx.beginPath();
+		ctx.moveTo(oldX,oldY);
+		ctx.lineTo(x,y);
+		ctx.stroke();
+		oldX = x;
+		oldY = y;
+	}
+}
+
+var colorChange = function(){
+	var color = $(this).val();
+	ctx.strokeStyle = color;
+	console.log(color);
+}
+$(can).on("mousedown",down);
+$(can).on("mouseup mouseleave",up);
+$(can).on("mousemove",draw);
+$("#color").on("change",colorChange);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Windowオブジェクトを確認</title>
+<script>
+// ------------------------------------------------------------
+// クリックした時に実行されるイベント
+// ------------------------------------------------------------
+var window_obj = null;
+document.onclick = function (){ //document全てに対してクリックハンダラを指定
+    //window_objがnullの場合
+    if(!window_obj){
+        // 新しくページを開いて、ウィンドウオブジェクトを取得する
+        window_obj = window.open("http://www.yahoo.co.jp/","_blank");
+
+    //window_objがnullではない場合
+    }else{
+        // ウィンドウを閉じる
+        window_obj.close();
+        // 参照を断つ
+        window_obj = null;
+    }
+
+};
+</script>
+</head>
+<body>
+<h1>Windowオブジェクトを確認</h1>
+</body>
+</html>

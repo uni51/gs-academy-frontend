@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>this</title>
+<script>
+window.onload = function() {
+     //関数定義
+     var mybtn = document.getElementById("mybutton");
+     mybtn.onclick = function () {
+          console.log("id: " + this.id);
+          console.log("name: " + this.name);
+          console.log("class: " +this.className);
+     }
+
+     //Globalオブジェクトの例
+     //console.log(this.document);
+};
+</script>
+</head>
+<body>
+<h1>thisを使った１例</h1>
+<button id="mybutton" name="test_btn" class="f1">クリックしてコンソールで確認</button>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#canvas{
+			background:#ccc;
+		}
+		
+    ul{
+        padding: 0;
+        border-top: 1px solid #000000;
+        display:table;  /* 定義 */
+        table-layout: fixed;
+        width:100%;
+    }
+    
+    li{
+        list-style-type:none;
+        border: 1px solid #666;
+        background-color: #FFF;
+        display:table-cell;  /* 定義 */
+        cursor: pointer;
+    }
+    
+    li:hover{
+        background: #0066CC;
+        color:#fff;
+    }
+	</style>
+</head>
+<body>
+
+<p>色：<br>
+<input type="color" name="color" id="color" valeu=""></p>
+
+<p>線の太さ：<br>
+<select name="line_width" id="line_width">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="10">10</option>
+<option value="20">20</option>
+<option value="30">30</option>
+<option value="40">40</option>
+<option value="50">50</option>
+<option value="100">100</option>
+<option value="200">200</option>
+</select></p>
+
+<canvas id="canvas" width="400" height="300"></canvas>
+
+<ul>
+    <li id="save">Save</li>
+    <li id="clear">Clear</li>
+    <li id="load">Load</li>
+</ul>
+
+<section>
+    <h2>canvasをPNGに変換してimg要素で表示</h2>
+	<img src="" alt="PNGに変換" width="400" height="300" id="image_png" class="target-img" />
+	<!--
+	<section>
+		<h3>data: url の中身</h3>
+		<pre id="data_url_png"></pre>
+	</section>
+	-->
+</section>
+
+<script src="//code.jquery.com/jquery-3.1.1.js"></script>
+<script>
+/*Canvasに関する記述をここから書いていきましょう*/
+
+var can = $("#canvas")[0];
+var ctx = can.getContext("2d");
+
+ctx.strokeStyle = "#00f"; // 線の色の指定
+//ctx.lineWidth = 9;
+ctx.linecap = "round";
+
+var oldX,oldY;
+var flag = false;
+
+$(can).on("mousedown",function(e){
+    oldX = e.offsetX;
+    oldY = e.offsetY;
+    flag = true;
+    console.log(e.offsetX); // X座標
+    console.log(e.offsetY); // Y座標
+});
+
+$(can).on("mouseup mouseleave",function(){
+    flag = false;
+});
+
+$(can).on("mousemove",function(e){
+    // マウスが押されている、つまりflag==trueの時に描画
+    if(flag==true){
+        // 描画のスクリプトを実行する
+        var x = e.offsetX;
+        var y = e.offsetY;
+
+        ctx.beginPath();
+        ctx.moveTo(oldX,oldY); //開始点X座標とY座標
+        ctx.lineTo(x,y);
+        ctx.stroke();
+        ctx.closePath();
+        
+        oldX = x;
+        oldY = y;
+    }
+});
+
+/* 色の変更 */
+$("#color").on("change",function(){
+    var color = $("#color").val();
+    ctx.strokeStyle = color;
+});
+
+/* 線の太さの変更 */
+$("#line_width").on("change",function(){
+    var lw = $("#line_width").val();
+    ctx.lineWidth = lw;
+});
+
+
+
+// 3-3 線を描く
+//ctx.beginPath();
+//ctx.moveTo(10,10); //開始点X座標とY座標
+//ctx.lineTo(100,100); //終了点X座標とY座標
+//ctx.stroke(); //線を描画
+//ctx.closePath(); //図形を閉じようとします
+
+
+  //1.Save クリックイベント
+  $("#save").on("click",function(){
+    var img_png_src = canvas.toDataURL();
+    localStorage.setItem("img_1", img_png_src); // KEYネームと値
+    alert("ローカルストレージに保存しました");
+  });
+
+   //2.clear クリックイベント
+   $("#clear").on("click",function(){
+    localStorage.removeItem("img_1");
+    document.getElementById("image_png").src = null;
+    document.getElementById("image_png").alt = "";    
+    alert("ローカルストレージから削除しました");
+    $("#text_area").val("");
+   });
+   
+   //3.load クリックイベント
+  $("#load").on("click",function(){
+    /* canvasの描画結果をPNGで取り出しimg要素にセット */
+    try {
+      var img_png_src = localStorage.getItem("img_1");
+      document.getElementById("image_png").src = img_png_src;
+      //document.getElementById("data_url_png").firstChild.nodeValue = img_png_src;
+    } catch(e) {
+      document.getElementById("image_png").alt = "未対応";
+    }    
+  });      
+
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+<script>
+$(function(){
+//ここにJSを記述
+    
+    //id属性名を変数に保持
+    var pc   = "#pc_hands";
+    var jud  = "#judgment";
+    //判定
+    var win  = "勝ち";
+    var drw  = "引き分け";
+    var def  = "負け";
+    //手
+    var cho  = "チョキ";
+    var guu  = "グー";
+    var par  = "パー";
+
+    //あなたがチョキをクリックしたら
+    $("#cho_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        //0=グー（負け）
+        var rand = Math.floor(Math.random()*3);
+        if(rand==0){
+            $(pc).html(guu);
+            $(jud).html(def);
+        }
+        //1=チョキ（引き分け）
+        if(rand==1){
+            $(pc).html(cho);
+            $(jud).html(drw);
+        }
+        //2=パー（勝ち）
+        if(rand==2){
+            $(pc).html(par);
+            $(jud).html(win);
+        }
+    });
+
+    //あなたがグーをクリックしたら
+    $("#gu_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        //0=グー（引き分け）
+        var rand = Math.floor(Math.random()*3);
+        if(rand==0){
+            $(pc).html(guu);
+            $(jud).html(drw);
+        }
+        //1=チョキ（勝ち）
+        if(rand==1){
+            $(pc).html(cho);
+            $(jud).html(win);
+        }
+        //2=パー（負け）
+        if(rand==2){
+            $(pc).html(par);
+            $(jud).html(def);
+        }
+    });
+
+    //あなたがパーをクリックしたら
+    $("#par_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        //0=グー（勝ち）
+        var rand = Math.floor(Math.random()*3);
+        if(rand==0){
+            $(pc).html(guu);
+            $(jud).html(win);
+        }
+        //1=チョキ（負け）
+        if(rand==1){
+            $(pc).html(cho);
+            $(jud).html(def);
+        }
+        //2=パー（引き分け）
+        if(rand==2){
+            $(pc).html(par);
+            $(jud).html(drw);
+        }
+    });
+    
+    
+});
+</script>
+</head>
+<body>
+
+<header>
+  <h1>じゃんけん</h1>
+</header>
+
+<main>
+  <ul>
+    <li id="gu_btn">グー</li>
+    <li id="cho_btn">チョキ</li>
+    <li id="par_btn">パー</li>
+  </ul>
+  <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
+  <div id="judgment">勝ち</div>
+</main>
+
+<footer></footer>
+
+</body>
+</html>

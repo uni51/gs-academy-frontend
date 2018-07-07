@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>おみくじ</title>
+<script>
+// 昔風の書き方
+//$(document).ready(function(){
+
+
+// 今風の宣言の仕方
+$(function(){
+//ここに記述していきます！
+    
+    $("#hoshi").on("click", function(){
+        
+        var num = Math.floor(Math.random()*5+1); // 1から5
+        // 大吉5 ～ 凶1
+        if(num==5){
+            $("#echo").html('大吉');
+        }
+        if(num==4){
+            $("#echo").html('中吉');
+        }
+        if(num==3){
+            $("#echo").html('末吉');
+        }
+        if(num==2){
+            $("#echo").html('吉');
+        }
+        if(num==1){
+            $("#echo").html('大凶');
+        }
+
+
+//        $("h1").html("Ya!!");
+//        $("h1").css("color","red");
+//        $("h1").css("background-color","gray");
+//        //$("h1").hide(2000).show(1000);
+//        $("h1").fadeOut(2000).fadeIn(1000);
+
+    });
+
+
+    $("#maru").on("click", function(){
+        var num = Math.floor(Math.random()*5+1); // 1から5
+        // 大吉5 ～ 凶1
+        if(num==5){
+            $("#echo").html('大吉');
+        }
+        if(num==4){
+            $("#echo").html('中吉');
+        }
+        if(num==3){
+            $("#echo").html('末吉');
+        }
+        if(num==2){
+            $("#echo").html('吉');
+        }
+        if(num==1){
+            $("#echo").html('大凶');
+        }
+    });
+
+    $("#shikaku").on("click", function(){
+        var num = Math.floor(Math.random()*5+1); // 1から5
+        // 大吉5 ～ 凶1
+        if(num==5){
+            $("#echo").html('大吉');
+        }
+        if(num==4){
+            $("#echo").html('中吉');
+        }
+        if(num==3){
+            $("#echo").html('末吉');
+        }
+        if(num==2){
+            $("#echo").html('吉');
+        }
+        if(num==1){
+            $("#echo").html('大凶');
+        }
+    });
+
+    $("#batsu").on("click", function(){
+        var num = Math.floor(Math.random()*5+1); // 1から5
+        // 大吉5 ～ 凶1
+        if(num==5){
+            $("#echo").html('大吉');
+        }
+        if(num==4){
+            $("#echo").html('中吉');
+        }
+        if(num==3){
+            $("#echo").html('末吉');
+        }
+        if(num==2){
+            $("#echo").html('吉');
+        }
+        if(num==1){
+            $("#echo").html('大凶');
+        }
+    });
+
+});
+</script>
+</head>
+<body>
+
+<header>
+    <h1>おみくじ</h1>
+</header>
+
+<main>
+    <ul>
+        <li id="hoshi">★の箱</li>
+        <li id="maru">●の箱</li>
+        <li id="shikaku">■の箱</li>
+        <li id="batsu">×の箱</li>
+    </ul>
+    <p id="echo"></p>
+</main>
+
+<footer>フッター</footer>
+
+</body>
+</html>

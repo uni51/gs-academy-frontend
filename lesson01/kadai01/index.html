@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+<script>
+$(function(){
+//ここにJSを記述
+    
+    //HTMLのid属性名を変数に保持
+    var pch  = "#pc_hands";
+    var jud  = "#judgment";
+    var sen  = "#senseki"; // 戦った回数は？
+    var vic  = "#victory"; // 勝った回数は？
+    var wpc  = "#win_percent"; // 勝率は？
+    var tlr  = "#total_result"; // 通算対戦成績
+
+    //判定
+    var win  = "勝ち";
+    var drw  = "引き分け";
+    var los  = "負け";
+
+    //手
+    var cho  = "チョキ";
+    var guu  = "グー";
+    var par  = "パー";
+    
+    //戦った回数
+    var bnum = 0;
+
+    // 勝った回数
+    var wnum = 0;
+    
+    // 勝率
+    var wrate = 0;
+    
+    //判定（通算対戦成績）
+    var result = "";
+    var winbr  = '<font color="ff0000">勝ち</font><br>';
+    var drwbr  = "引き分け<br>";
+    var losbr  = "負け<br>";
+
+
+    //あなたがチョキをクリックしたら
+    $("#cho_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        var rand = Math.floor(Math.random()*3);
+        //0=グー（負け）
+        if(rand==0){
+            $(pch).html(guu);
+            $(jud).html(los);
+            result += losbr;
+        }
+        //1=チョキ（引き分け）
+        if(rand==1){
+            $(pch).html(cho);
+            $(jud).html(drw);
+            result += drwbr;           
+        }
+        //2=パー（勝ち）
+        if(rand==2){
+            wnum++;
+            $(pch).html(par);
+            $(jud).html(win);
+            $(vic).html(wnum);
+            result += winbr;            
+        }
+
+        // 戦った回数        
+        bnum++;
+        $(sen).html(bnum);
+        // 勝率
+        wrate = wnum/bnum * 100;
+        $(wpc).html(wrate);
+        // 通算対戦成績        
+        $(tlr).html(result);        
+    });
+
+    //あなたがグーをクリックしたら
+    $("#gu_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        var rand = Math.floor(Math.random()*3);
+        //0=グー（引き分け）
+        if(rand==0){
+            $(pch).html(guu);
+            $(jud).html(drw);
+            result += drwbr;          
+        }
+        //1=チョキ（勝ち）
+        if(rand==1){
+            wnum++;
+            $(pch).html(cho);
+            $(jud).html(win);
+            $(vic).html(wnum);
+            result += winbr;          
+        }
+        //2=パー（負け）
+        if(rand==2){
+            $(pch).html(par);
+            $(jud).html(los);
+            result += losbr;           
+        }
+        
+        // 戦った回数
+        bnum++;
+        $(sen).html(bnum);
+        // 勝率
+        wrate = wnum/bnum * 100;
+        $(wpc).html(wrate);
+        // 通算対戦成績
+        $(tlr).html(result);        
+
+    });
+
+    //あなたがパーをクリックしたら
+    $("#par_btn").on("click",function(){
+        //randには[0,1,2]の数値１つが代入される(重要：clickの中に書くこと)
+        var rand = Math.floor(Math.random()*3);
+        //0=グー（勝ち）
+        if(rand==0){
+            wnum++;
+            $(pch).html(guu);
+            $(jud).html(win);
+            $(vic).html(wnum);
+            result += winbr;             
+        }
+        //1=チョキ（負け）
+        if(rand==1){
+            $(pch).html(cho);
+            $(jud).html(los);
+            result += losbr;             
+        }
+        //2=パー（引き分け）
+        if(rand==2){
+            $(pch).html(par);
+            $(jud).html(drw);
+            result += drwbr;            
+        }
+
+        // 戦った回数        
+        bnum++;
+        $(sen).html(bnum);
+        // 勝率        
+        wrate = wnum/bnum * 100;
+        $(wpc).html(wrate);
+        // 通算対戦成績        
+        $(tlr).html(result);        
+
+    });
+
+/*
+追加課題
+・ 勝った数をカウントしていく→済
+・ 勝率を表示する
+※何回戦、戦ったかも表示
+*/
+});
+</script>
+</head>
+<body>
+
+<header>
+  <h1>じゃんけん</h1>
+</header>
+
+<main>
+  <ul>
+    <li id="gu_btn">グー</li>
+    <li id="cho_btn">チョキ</li>
+    <li id="par_btn">パー</li>
+  </ul>
+  <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
+  <div id="judgment">勝ち</div>
+  <div>戦った回数は？：<span id="senseki">0</div>
+  <div>勝った回数は？：<span id="victory">0</span></div>
+  <div>勝率は？：<span id="win_percent">0</span>%</div>
+  <div>通算対戦成績：<br>
+     <span id="total_result"></span>
+　</div>  
+</main>
+
+<footer></footer>
+
+</body>
+</html>
